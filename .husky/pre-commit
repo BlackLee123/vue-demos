@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+pnpm --filter vue-nice-modal run format
+pnpm --filter vue-nice-modal run lint
+
+
+pnpm --filter empty-demo run format
+pnpm --filter empty-demo run lint

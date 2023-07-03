@@ -2,7 +2,7 @@
 import { useVModel } from '@vueuse/core'
 import type { INiceModalHandlers } from 'vue-nice-modal'
 
-console.log("123")
+console.log('123')
 
 interface IProps extends INiceModalHandlers<string> {
   visible: boolean

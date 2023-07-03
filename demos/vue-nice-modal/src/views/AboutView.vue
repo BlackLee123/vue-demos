@@ -2,7 +2,7 @@
 import { create } from 'vue-nice-modal'
 import MyModal from './MyModal.vue'
 
-  const myModal = create(MyModal)
+const myModal = create(MyModal)
 
 const showModal = () => {
   myModal
