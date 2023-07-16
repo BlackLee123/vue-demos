@@ -1,23 +1,32 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { computed } from 'vue'
+import { RouterView } from 'vue-router'
+import { theme } from 'ant-design-vue'
+import zh_CN from 'ant-design-vue/es/locale/zh_CN'
+import { useDark } from '@vueuse/core'
+
+const isDark = useDark()
+const algorithm = computed(() => {
+  return isDark.value
+    ? [theme.darkAlgorithm, theme.compactAlgorithm]
+    : [theme.defaultAlgorithm, theme.compactAlgorithm]
+})
+console.log('isDark', isDark.value, algorithm.value)
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <a-config-provider
+    :theme="{
+      token: {
+        borderRadius: `2px`
+      },
+      algorithm: algorithm
+    }"
+    :locale="zh_CN"
+    component-size="middle"
+  >
+    <router-view></router-view>
+  </a-config-provider>
 </template>
 
 <style scoped>

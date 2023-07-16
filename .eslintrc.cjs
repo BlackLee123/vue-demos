@@ -2,6 +2,11 @@
 require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
   root: true,
   'extends': [
     'plugin:vue/vue3-essential',
@@ -11,5 +16,8 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
+  },
+  rules: {
+    'vue/multi-word-component-names': 'off',
   }
 }
