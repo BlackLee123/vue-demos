@@ -1,57 +1,77 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import { theme } from 'ant-design-vue'
+import { UserOutlined } from '@ant-design/icons-vue'
 import { useDark, useToggle } from '@vueuse/core'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
+console.log('router', route.name)
 
 const isDark = useDark()
-console.log('dark', isDark.value)
 const toggleDark = useToggle(isDark)
 const { useToken } = theme
 const { token } = useToken()
 </script>
 <template>
-  <a-layout>
+  <a-layout style="">
     <a-layout-header
       :style="{
-        position: 'fixed',
+        position: 'sticky',
+        top: 0,
         zIndex: 1,
         width: '100%',
-        display: 'flex',
-        background: `${token.colorBgLayout}`,
-        'border-bottom': `1px solid ${token.colorBorder}`
+        display: 'flex'
       }"
     >
-      <a-dropdown>
-        <div style="display: flex; align-items: center; justify-content: center">
-          <img
-            style="dispaly: block; flex: 1"
-            alt="Vue logo"
-            class="logo"
-            src="@/assets/logo.svg"
-            height="24"
-            width="100"
-          />
-        </div>
-        <template #overlay>
-          <a-menu style="width: 100vw">
-            <a-menu-item>
-              <a href="javascript:;">1st menu item</a>
-            </a-menu-item>
-            <a-menu-item>
-              <a href="javascript:;">2nd menu item</a>
-            </a-menu-item>
-            <a-menu-item>
-              <a href="javascript:;">3rd menu item</a>
-            </a-menu-item>
-          </a-menu>
-        </template>
-      </a-dropdown>
-      <div>
-        <a-button type="primary" @click="toggleDark()">{{ isDark ? '暗黑' : '亮色' }}</a-button>
+      <div
+        href="/"
+        style="
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: left;
+        "
+      >
+        <a-dropdown>
+          <a href="/" style="height: 100%"
+            ><img alt="Vue logo" class="logo" src="@/assets/logo.svg" style="height: 50%"
+          /></a>
+
+          <template #overlay>
+            <a-menu style="width: 100vw">
+              <a-menu-item>
+                <a href="javascript:;">1st menu item</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a href="javascript:;">2nd menu item</a>
+              </a-menu-item>
+              <a-menu-item>
+                <a href="javascript:;">3rd menu item</a>
+              </a-menu-item>
+            </a-menu>
+          </template>
+        </a-dropdown>
       </div>
+      <div style="flex: 1"></div>
+      <a-space>
+        <div>
+          <a-button type="primary" @click="toggleDark()">{{ isDark ? '暗黑' : '亮色' }}</a-button>
+        </div>
+        <div>
+          <a-avatar style="background-color: #87d068">
+            <template #icon>
+              <UserOutlined />
+            </template>
+          </a-avatar>
+        </div>
+      </a-space>
     </a-layout-header>
-    <a-layout-content style="max-width: 1200px; margin: 0 auto; height: 100vh">
-      <router-view />
+    <a-layout-content style="min-height: 100vh">
+      <div style="max-width: 1200px; background-color: aquamarine; margin: 24px auto">
+        <router-view />
+      </div>
     </a-layout-content>
     <a-layout-footer style="padding: 0">
       <footer
@@ -62,7 +82,8 @@ const { token } = useToken()
           display: 'flex',
           'justify-content': 'space-between',
           'max-width': '1200px',
-          margin: '0 auto'
+          margin: '0 auto',
+          padding: '0 8px'
         }"
       >
         <div>copyright</div>
@@ -71,3 +92,7 @@ const { token } = useToken()
     </a-layout-footer>
   </a-layout>
 </template>
+<style scoped lang="less">
+.header {
+}
+</style>
